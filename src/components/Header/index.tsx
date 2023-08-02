@@ -1,5 +1,6 @@
 import headerImg from '../../assets/Cover.svg';
+import { HeaderContainer } from './styles';
 
 export function Header() {
-  return <img src={headerImg} alt="Cabeçalho" />;
+  return <HeaderContainer src={headerImg} alt="Cabeçalho" />;
 }

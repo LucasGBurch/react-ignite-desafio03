@@ -4,8 +4,9 @@ export const LayoutContainer = styled.div`
   background-color: ${props => props.theme["base-background"]};
 
   margin: 0 auto;
-  max-width: 90rem;
+  width: 100%;
 
   display: flex;
   flex-direction: column;
+  align-items: center;
 `;
