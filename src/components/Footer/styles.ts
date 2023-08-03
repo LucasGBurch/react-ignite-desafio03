@@ -14,15 +14,15 @@ export const FooterContainer = styled.footer`
   align-items: center;
   justify-content: center;
 
-  background-color: ${props => props.theme["base-post"]};
-  color: ${props => props.theme["base-title"]};
+  background-color: ${props => props.theme.colors["base-post"]};
+  color: ${props => props.theme.colors["base-title"]};
 
   a {
     text-decoration: none;
     font-weight: bold;
 
     &:visited {
-      color: ${props => props.theme["base-text"]};
+      color: ${props => props.theme.colors['base-text']};
     }
   }
 `;
