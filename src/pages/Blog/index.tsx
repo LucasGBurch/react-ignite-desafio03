@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { SearchForm } from "./components/SearchForm";
 import { PostContainer, PostList, Profile } from "./styles";
 import { FaArrowUpRightFromSquare, FaBuilding, FaGithub, FaUserGroup } from 'react-icons/fa6';
@@ -10,10 +11,10 @@ export function Blog() {
         <section>
           <div>
             <h2>Lucas Burch</h2>
-            <a>
+            <Link to='https://github.com/LucasGBurch' target='_blank'>
               <span>GITHUB</span>
               <FaArrowUpRightFromSquare />
-            </a>
+            </Link>
           </div>
 
           <p>Tristique volutpat pulvinar vel massa, pellentesque egestas. Eu viverra massa quam dignissim aenean malesuada suscipit. Nunc, volutpat pulvinar vel mass. </p>

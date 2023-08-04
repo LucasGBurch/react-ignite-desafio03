@@ -53,8 +53,8 @@ export const Profile = styled.section`
         display: flex;
         align-items: center;
         gap: 0.5rem;
+        text-decoration: none;
 
-        cursor: pointer;
         font-size: ${props => props.theme.fontSize.tn};
 
         border-bottom: solid 1px transparent;
