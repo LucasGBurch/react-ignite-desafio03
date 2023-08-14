@@ -2,35 +2,39 @@ import { Link } from 'react-router-dom';
 import { SearchForm } from "./components/SearchForm";
 import { PostContainer, PostList, Profile } from "./styles";
 import { FaArrowUpRightFromSquare, FaBuilding, FaGithub, FaUserGroup } from 'react-icons/fa6';
+import { useContext } from 'react';
+import { GitHubContext } from '../../contexts/GitHubContext';
 
 export function Blog() {
+  const { userData } = useContext(GitHubContext);
+
   return (
     <PostContainer>
-      <Profile>
-        <img src="https://github.com/LucasGBurch.png" alt={`Perfil do GitHub de `} />
+      <Profile> {/**AVATAR URL */}
+        <img src={userData?.avatar_url} alt={`Perfil do GitHub de `} />
         <section>
           <div>
-            <h2>Lucas Burch</h2>
+            <h2>{userData?.name}</h2> {/**LOGIN NESSE LINK */}
             <Link to='https://github.com/LucasGBurch' target='_blank'>
               <span>GITHUB</span>
               <FaArrowUpRightFromSquare />
             </Link>
           </div>
 
-          <p>Tristique volutpat pulvinar vel massa, pellentesque egestas. Eu viverra massa quam dignissim aenean malesuada suscipit. Nunc, volutpat pulvinar vel mass. </p>
+          <p>{userData?.bio}</p>
 
           <div>
             <div>
               <FaGithub />
-              <span>LucasGBurch</span>
+              <span>{userData?.login}</span>
             </div>
             <div>
               <FaBuilding />
-              <span>Rocketseat Ignite</span>
+              <span>{userData?.company}</span>
             </div>
             <div>
               <FaUserGroup />
-              <span>25 Seguidores</span>
+              <span>{userData?.followers}</span>
             </div>
           </div>
         </section>
