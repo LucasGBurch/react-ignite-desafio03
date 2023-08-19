@@ -1,5 +1,9 @@
 import axios from 'axios';
 
-export const api = axios.create({
+export const apiGitHubUser = axios.create({
   baseURL: 'http://api.github.com'
-})
+});
+
+export const apiGitHubIssueSearch = axios.create({
+  baseURL: 'https://api.github.com/search'
+});
