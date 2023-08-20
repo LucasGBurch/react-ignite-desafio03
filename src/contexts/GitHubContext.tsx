@@ -12,12 +12,13 @@ interface GitHubUserData {
 }
 
 // Modelo para confirmar caminho de cada dado: `https://api.github.com/search/issues?q=${query}%20repo:LucasGBurch/react-ignite-desafio03`
+// Para consulta dos dados: https://api.github.com/search/issues?q=%20repo:LucasGBurch/react-ignite-desafio03
 
 interface GitHubUserIssuesData {
   issueLogin: string;
-  issueId: number;
+  issueNumber: number;
   title: string;
-  comments: number;
+  comments: string;
   created_at: string; // Formatada com date-fns
   body: string; // Aplicar com React Markdown
 }
@@ -41,7 +42,8 @@ export function GitHubProvider({ children }: GitHubProviderProps) {
   const [totalCount, setTotalCount] = useState<number>(0);
 
   const fetchGitHubUserData = useCallback(async () => {
-    const response = await apiGitHubUser.get('/users/LucasGBurch');
+    const response = await apiGitHubUser
+      .get('/users/LucasGBurch');
 
     const data = response.data;
 
@@ -59,7 +61,8 @@ export function GitHubProvider({ children }: GitHubProviderProps) {
   }, []);
 
   const fetchGitHubUserIssuesData = useCallback(async (query?: string) => {
-    const response = await apiGitHubIssueSearch.get(`/issues?q=${query ? query : ''}%20repo:LucasGBurch/react-ignite-desafio03`);
+    const response = await apiGitHubIssueSearch
+      .get(`/issues?q=${query ? query : ''}%20repo:LucasGBurch/react-ignite-desafio03`);
 
     const data = response.data;
     // console.log(data)
@@ -72,9 +75,11 @@ export function GitHubProvider({ children }: GitHubProviderProps) {
       for (const key in data.items) {
         updatedIssues.push({
           issueLogin: data.items[key].user.login,
-          issueId: data.items[key].id,
+          issueNumber: data.items[key].number,
           title: data.items[key].title,
-          comments: data.items[key].comments,
+          comments: data.items[key].comments === 1
+            ? `${data.items[key].comments} comentário`
+            : `${data.items[key].comments} comentários`,
           created_at: dateFormatter(data.items[key].created_at),
           body: data.items[key].body,
         });

@@ -1,10 +1,18 @@
 import { FaArrowUpRightFromSquare, FaCalendar, FaChevronLeft, FaComment, FaGithub } from 'react-icons/fa6';
 import { IssueTextContainer, IssueTitleContainer, PostContainer } from "./styles";
-import { Link } from 'react-router-dom';
-
-// Facomment e FaCalendar
+import { Link, useParams } from 'react-router-dom';
+import { useContext } from 'react';
+import { GitHubContext } from '../../contexts/GitHubContext';
 
 export function Post() {
+  const { userIssuesData } = useContext(GitHubContext);
+  const params = useParams();
+
+  const currentIssueData = userIssuesData.find(
+    (data) => String(data.issueNumber) === params.id
+  );
+  // console.log(currentIssueData);
+
   return (
     <PostContainer>
       <IssueTitleContainer>
@@ -18,25 +26,27 @@ export function Post() {
             <FaArrowUpRightFromSquare />
           </Link>
         </div>
-        <h2>Título da Issue do GitHub</h2>
+        <h2>{ }</h2>
         <div>
-            <div>
-              <FaGithub />
-              <span>LucasGBurch</span>
-            </div>
-            <div>
-              <FaCalendar />
-              <span>Há 2 dias</span>
-            </div>
-            <div>
-              <FaComment />
-              <span>25 Comentários</span>
-            </div>
+          <div>
+            <FaGithub />
+            <span>{currentIssueData?.issueLogin}</span>
           </div>
+          <div>
+            <FaCalendar />
+            <span>{currentIssueData?.created_at}</span>
+          </div>
+          <div>
+            <FaComment />
+            <span>{currentIssueData?.comments}</span>
+          </div>
+        </div>
       </IssueTitleContainer>
       <IssueTextContainer>
-
+        <p>
+          {currentIssueData?.body}
+        </p>
       </IssueTextContainer>
     </PostContainer>
-  )
+  );
 }

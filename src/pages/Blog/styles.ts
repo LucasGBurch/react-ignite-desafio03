@@ -3,6 +3,7 @@ import { styled } from "styled-components";
 export const PostContainer = styled.div`
   min-height: 42.75rem;
   max-width: 54rem;
+  margin-top: -5.5rem;
 
   display: flex;
   flex-direction: column;
@@ -19,7 +20,6 @@ export const Profile = styled.section`
   height: 13.25rem;
   width: 54rem;
 
-  margin-top: -5.5rem;
   margin-bottom: 4.5rem;
 
   display: flex;

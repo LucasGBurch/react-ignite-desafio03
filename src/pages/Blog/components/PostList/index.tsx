@@ -10,8 +10,8 @@ export function PostList() {
     <PostListContainer>
       {userIssuesData?.map((issueData) => (
         <PostListItem
-          key={issueData.issueId}
-          issueId={issueData.issueId}
+          key={issueData.issueNumber}
+          issueNumber={issueData.issueNumber}
           title={issueData.title}
           created_at={issueData.created_at}
           body={issueData.body}
