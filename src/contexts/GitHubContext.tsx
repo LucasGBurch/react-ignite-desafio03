@@ -14,9 +14,8 @@ interface GitHubUserData {
 // Modelo para confirmar caminho de cada dado: `https://api.github.com/search/issues?q=${query}%20repo:LucasGBurch/react-ignite-desafio03`
 
 interface GitHubUserIssuesData {
-  total_count: number;
-  login: string;
-  id: number;
+  issueLogin: string;
+  issueId: number;
   title: string;
   comments: number;
   created_at: string; // Formatada com date-fns
@@ -25,8 +24,9 @@ interface GitHubUserIssuesData {
 
 interface GitHubContextType {
   userData: GitHubUserData | undefined;
-  userIssuesData: GitHubUserIssuesData | undefined;
+  userIssuesData: GitHubUserIssuesData[];
   fetchGitHubUserIssuesData: (query?: string) => Promise<void>;
+  totalCount: number;
 }
 
 export const GitHubContext = createContext({} as GitHubContextType);
@@ -37,7 +37,8 @@ interface GitHubProviderProps {
 
 export function GitHubProvider({ children }: GitHubProviderProps) {
   const [userData, setUserData] = useState<GitHubUserData>();
-  const [userIssuesData, setUserIssuesData] = useState<GitHubUserIssuesData>();
+  const [userIssuesData, setUserIssuesData] = useState<GitHubUserIssuesData[]>([]);
+  const [totalCount, setTotalCount] = useState<number>(0);
 
   const fetchGitHubUserData = useCallback(async () => {
     const response = await apiGitHubUser.get('/users/LucasGBurch');
@@ -54,23 +55,33 @@ export function GitHubProvider({ children }: GitHubProviderProps) {
     })
     );
 
-    console.log(userData);
+    // console.log(userData);
   }, []);
 
   const fetchGitHubUserIssuesData = useCallback(async (query?: string) => {
     const response = await apiGitHubIssueSearch.get(`/issues?q=${query ? query : ''}%20repo:LucasGBurch/react-ignite-desafio03`);
 
     const data = response.data;
+    // console.log(data)
 
-    setUserIssuesData(() => ({
-      total_count: data.total_count,
-      login: data.items.user.login,
-      id: data.items.id,
-      title: data.items.title,
-      comments: data.items.comments,
-      created_at: dateFormatter(data.items.created_at),
-      body: data.items.body,
-    }));
+    setTotalCount(() => data.total_count);
+
+    setUserIssuesData(() => {
+      const updatedIssues = [];
+
+      for (const key in data.items) {
+        updatedIssues.push({
+          issueLogin: data.items[key].user.login,
+          issueId: data.items[key].id,
+          title: data.items[key].title,
+          comments: data.items[key].comments,
+          created_at: dateFormatter(data.items[key].created_at),
+          body: data.items[key].body,
+        });
+      }
+
+      return updatedIssues;
+    });
   }, []);
 
   useEffect(() => {
@@ -79,7 +90,7 @@ export function GitHubProvider({ children }: GitHubProviderProps) {
   }, [fetchGitHubUserData, fetchGitHubUserIssuesData]);
 
   return (
-    <GitHubContext.Provider value={{ userData, userIssuesData, fetchGitHubUserIssuesData }}>
+    <GitHubContext.Provider value={{ userData, userIssuesData, fetchGitHubUserIssuesData, totalCount }}>
       {children}
     </GitHubContext.Provider>
   );
