@@ -3,7 +3,6 @@ import { apiGitHubIssueSearch, apiGitHubUser } from '../lib/axios';
 import { dateFormatter } from '../utils/formatter';
 
 interface GitHubUserData {
-  avatar_url: string;
   bio: string;
   company: string | null;
   followers: string;
@@ -48,7 +47,6 @@ export function GitHubProvider({ children }: GitHubProviderProps) {
     const data = response.data;
 
     setUserData(() => ({
-      avatar_url: data.avatar_url,
       bio: data.bio,
       company: data.company !== null ? data.company : 'Rocketseat Ignite',
       followers: data.followers > 1 ? `${data.followers} Seguidores` : `${data.followers} Seguidor`,

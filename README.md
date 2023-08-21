@@ -13,7 +13,7 @@
 
 # Instruções para rodar:
 
-- **ATENÇÃO!** Caso queira acessar diretamente a aplicação, sem baixar/olhar o projeto e seus códigos, ela está implementada neste link da Vercel: [INSERIR LINK] ;
+- **ATENÇÃO!** Caso queira acessar diretamente a aplicação, sem baixar/olhar o projeto e seus códigos, ela está implementada neste link da Vercel: https://react-ignite-desafio03.vercel.app/ ;
 
 - Caso contrário: ao Baixar/Abrir o projeto, **é recomendável fazê-lo no VSCode**, já que essa IDE foi utilizada para o desenvolvimento do desafio;
 

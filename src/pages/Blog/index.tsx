@@ -12,7 +12,7 @@ export function Blog() {
   return (
     <PostContainer>
       <Profile> {/**AVATAR URL */}
-        <img src={userData?.avatar_url} alt={`Perfil do GitHub de `} />
+        <img src={`https://github.com/${userData?.login}.png`} alt={`Perfil do GitHub de `} />
         <section>
           <div>
             <h2>{userData?.name}</h2> {/**LOGIN NESSE LINK */}
