@@ -1,9 +1,9 @@
-# Aplicação de Coffee Delivery:
- Repositório para **segundo Desafio do Ignite.** Uma aplicação simples e multipage de delivery para colocar em prática o que estudei durante as aulas do módulo 02 do Ignite, da Rocketseat.
+# Aplicação do meu GitHub Blog:
+ Repositório para **terceiro Desafio do Ignite.** Uma aplicação simples e multipage de consumo da API do GitHub, para colocar em prática o que estudei durante as aulas do módulo 03 do Ignite, da Rocketseat.
 
 # Sobre a aplicação:
 
-- Essa aplicação possui três páginas/rotas diferentes:
+- Essa aplicação possui duas páginas/rotas diferentes:
 
   - Blog - Página onde os dados de usuário são apresentados no início da tela, fazendo o primeiro uso da API do GitHub, com esses dados de usuário armazenados em variáveis de estado dentro de uma ContextAPI. Além disso, essa rota possui uma Lista de Postagens (issues) e um formulário. A lista renderiza itens que usam o consumo de API do GitHub, dessa vez com um state para cada Issue renderizada em cada ListItem. Esses itens são também links para navegar para a outra página;
 
