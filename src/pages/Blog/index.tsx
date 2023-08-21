@@ -11,12 +11,12 @@ export function Blog() {
 
   return (
     <PostContainer>
-      <Profile> {/**AVATAR URL */}
-        <img src={`https://github.com/${userData?.login}.png`} alt={`Perfil do GitHub de `} />
+      <Profile>
+        <img src={userData?.avatar_url} alt={`Perfil do GitHub de `} />
         <section>
           <div>
-            <h2>{userData?.name}</h2> {/**LOGIN NESSE LINK */}
-            <Link to='https://github.com/LucasGBurch' target='_blank'>
+            <h2>{userData?.name}</h2>
+            <Link to={`https://github.com/${userData?.login}`} target='_blank'>
               <span>GITHUB</span>
               <FaArrowUpRightFromSquare />
             </Link>

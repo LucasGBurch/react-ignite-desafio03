@@ -3,8 +3,9 @@ import { apiGitHubIssueSearch, apiGitHubUser } from '../lib/axios';
 import { dateFormatter } from '../utils/formatter';
 
 interface GitHubUserData {
+  avatar_url: string;
   bio: string;
-  company: string | null;
+  company: string;
   followers: string;
   name: string;
   login: string;
@@ -23,7 +24,7 @@ interface GitHubUserIssuesData {
 }
 
 interface GitHubContextType {
-  userData: GitHubUserData | undefined;
+  userData: GitHubUserData;
   userIssuesData: GitHubUserIssuesData[];
   fetchGitHubUserIssuesData: (query?: string) => Promise<void>;
   totalCount: number;
@@ -36,7 +37,16 @@ interface GitHubProviderProps {
 }
 
 export function GitHubProvider({ children }: GitHubProviderProps) {
-  const [userData, setUserData] = useState<GitHubUserData>();
+  const [userData, setUserData] = useState<GitHubUserData>(
+    {
+      avatar_url: '',
+      bio: '',
+      company: '',
+      followers: '',
+      name: '',
+      login: '',
+    }
+  );
   const [userIssuesData, setUserIssuesData] = useState<GitHubUserIssuesData[]>([]);
   const [totalCount, setTotalCount] = useState<number>(0);
 
@@ -47,6 +57,7 @@ export function GitHubProvider({ children }: GitHubProviderProps) {
     const data = response.data;
 
     setUserData(() => ({
+      avatar_url: data.avatar_url,
       bio: data.bio,
       company: data.company !== null ? data.company : 'Rocketseat Ignite',
       followers: data.followers > 1 ? `${data.followers} Seguidores` : `${data.followers} Seguidor`,
