@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { PostListItemContainer } from './styles';
+import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
 
 interface PostListItemProps {
   issueNumber: number;
@@ -12,7 +13,7 @@ export function PostListItem({ issueNumber, title, created_at, body }: PostListI
   const navigate = useNavigate();
 
   function navigateHandler() {
-    navigate(`/post/${issueNumber}`)
+    navigate(`/post/${issueNumber}`);
   }
 
   return (
@@ -21,9 +22,9 @@ export function PostListItem({ issueNumber, title, created_at, body }: PostListI
         <h3>{title}</h3>
         <span>{created_at}</span>
       </div>
-      <p>
-        {body}
-      </p>
+      <div>
+        <ReactMarkdown children={body} />
+      </div>
     </PostListItemContainer>
   );
 }

@@ -87,4 +87,15 @@ export const IssueTextContainer = styled.article`
   width: 100%;
   padding: 2.5rem 2rem;
 
+  p {
+    color: ${props => props.theme.colors['base-text']};
+  }
+
+  pre {
+    background-color: ${props => props.theme.colors['base-post']};
+    border-radius: 2px;
+    color: ${props => props.theme.colors['base-title']};
+    padding: 1rem;
+    margin: 1.5rem auto;
+  }
 `;

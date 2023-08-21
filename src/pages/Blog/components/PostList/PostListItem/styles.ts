@@ -40,7 +40,7 @@ export const PostListItemContainer = styled.li`
     }
   }
 
-  p {
+  div:last-child {
     color: ${props => props.theme.colors["base-text"]};
     height: 6.5rem;
     width: 22rem;

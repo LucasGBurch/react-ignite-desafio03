@@ -3,6 +3,9 @@ import { IssueTextContainer, IssueTitleContainer, PostContainer } from "./styles
 import { Link, useParams } from 'react-router-dom';
 import { useContext } from 'react';
 import { GitHubContext } from '../../contexts/GitHubContext';
+import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 export function Post() {
   const { userIssuesData } = useContext(GitHubContext);
@@ -12,6 +15,8 @@ export function Post() {
     (data) => String(data.issueNumber) === params.id
   );
   // console.log(currentIssueData);
+
+  // A propriedade components do ReactMarkdown veio deste link, só que, infelizmente, não consegui implementar para estilizar os códigos dentro das issues e achei complexo demais para compreender/mexer: https://github.com/remarkjs/react-markdown#use-custom-components-syntax-highlight
 
   return (
     <PostContainer>
@@ -26,7 +31,7 @@ export function Post() {
             <FaArrowUpRightFromSquare />
           </Link>
         </div>
-        <h2>{ }</h2>
+        <h2>{currentIssueData?.title}</h2>
         <div>
           <div>
             <FaGithub />
@@ -43,9 +48,27 @@ export function Post() {
         </div>
       </IssueTitleContainer>
       <IssueTextContainer>
-        <p>
-          {currentIssueData?.body}
-        </p>
+        <ReactMarkdown
+          children={currentIssueData!.body}
+          components={{
+            code({node, inline, className, children, ...props}) {
+              const match = /language-(\w+)/.exec(className || '')
+              return !inline && match ? (
+                <SyntaxHighlighter
+                  {...props}
+                  children={String(children).replace(/\n$/, '')}
+                  style={oneDark}
+                  language={match[1]}
+                  PreTag="div"
+                />
+              ) : (
+                <code {...props} className={className}>
+                  {children}
+                </code>
+              )
+            }
+          }}
+        />
       </IssueTextContainer>
     </PostContainer>
   );

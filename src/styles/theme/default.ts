@@ -11,6 +11,7 @@ export const defaultTheme = {
     'base-profile': '#0B1B2B',
     'base-background': '#071422',
     'base-input': '#040F1A',
+    'base-code': '#4F6173',
   },
 
 // 12, 14, 16, 18, 20 & 24px (tiny, little, medium, large-medium, large, extra-large)
